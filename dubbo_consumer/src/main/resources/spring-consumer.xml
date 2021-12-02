@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+<!--  服务名称 唯一  -->
+    <dubbo:application name="dubbo_consumer"/>
+<!--  注册在哪里  -->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <dubbo:annotation package="com.itheima.controller"/>
+
+    <!--
+      【check】启动时检查服务提供者是否就绪，true就检查（连不上则报错） 正式环境
+                        开发时，设置为false
+       【timeout】: 调用服务提供者是超时设置,单位ms
+       【retries】：失败时重试次数 2, 则一共调用3次
+    -->
+    <dubbo:consumer check="false" timeout="1000" retries="0"/>
+</beans>
